@@ -156,7 +156,7 @@ import {ToastAndroid} from 'react-native';
 //   };
 // }
 
-export function signUpUserEmailPassword(user,navigation) {
+export function signUpUserEmailPassword(user) {
   return (dispatch) => {
     auth()
       .createUserWithEmailAndPassword(user.email, user.password)
@@ -167,19 +167,21 @@ export function signUpUserEmailPassword(user,navigation) {
           .collection('users')
           .add(user)
           .then((doc) => {
-            ToastAndroid.show('Successfully Signed Up...', 2000);
+            ToastAndroid.show('Successfully Signed Up', 2000);
             dispatch({
               type: USER_REGISTERED,
               payload: user,
             });
-            navigation.navigate('Home');
+            // navigation.navigate('Home');
           })
           .catch((error) => {
-            ToastAndroid.show('Unsuccessfull Signed Up...', 2000);
+            ToastAndroid.show('Unsuccessfull Signed Up', 2000);
           });
       })
 
-      .catch((error) => {});
+      .catch((error) => {
+        ToastAndroid.show('Unsuccessfull Signed Up', 2000);
+      });
   };
 }
 
@@ -209,16 +211,15 @@ export function signUpUserEmailPassword(user,navigation) {
 //   };
 // }
 
-export function logInUserEmailPassword(user,navigation) {
+export function logInUserEmailPassword(user) {
   return (dispatch) => {
     auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then((success) => {
-        ToastAndroid.show('Successfully Signed In...', 2000);
-        navigation.navigate('Home');
+        ToastAndroid.show('Successfully Signed In', 2000);
       })
       .catch((error) => {
-        ToastAndroid.show('Unsuccessfull Signed In...', 2000);
+        ToastAndroid.show('Unsuccessfull Signed In', 2000);
       });
   };
 }
@@ -244,7 +245,11 @@ export function signOut() {
         dispatch({
           type: USER_LOGGED_OUT,
         });
-      });
+        ToastAndroid.show('Log Out Successfully', 2000);
+      })
+      .catch(()=>{
+        ToastAndroid.show('Unsuccessfull Log Out', 2000);
+      })
   };
 }
 
