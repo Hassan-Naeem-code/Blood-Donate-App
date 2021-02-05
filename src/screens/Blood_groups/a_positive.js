@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -17,10 +17,10 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import auth from '@react-native-firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {signOut,bring_B_Positive} from '../../../Store/actions/auth';
-import {useDispatch,useSelector} from 'react-redux';
+import {signOut, bring_A_Positive} from '../../../Store/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
 
-const B_Negative = ({navigation})=> {
+const A_Positive = ({navigation}) => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
   const wait = (time) => {
@@ -32,7 +32,7 @@ const B_Negative = ({navigation})=> {
     setRefreshing(true);
     auth().onAuthStateChanged((user) => {
       if (user) {
-        dispatch(bring_B_Positive('B+',user.uid));
+        dispatch(bring_A_Positive('A+',user.uid));
       }
     });
     wait(1200);
@@ -40,23 +40,23 @@ const B_Negative = ({navigation})=> {
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
       if (user) {
-        dispatch(bring_B_Positive('B+',user.uid));
+        dispatch(bring_A_Positive('A+',user.uid));
       }
     });
   }, []);
-  const getBpositive = useSelector(({auth}) => {
-    return auth.bpositive;
+  const getapositive = useSelector(({auth}) => {
+    return auth.apositive;
   });
-    return (
-        <View style={styles.container}>
+  return (
+    <View style={styles.container}>
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-          {getBpositive
-            && getBpositive.length >
+          {getapositive
+            && getapositive.length >
               0 ? (
-                getBpositive.map((item, index) => {
+                getapositive.map((item, index) => {
                   return (
                     <View style={styles.area_for_donor_card} key={index}>
                       <View style={styles.inner_view_under_second_view}>
@@ -125,133 +125,131 @@ const B_Negative = ({navigation})=> {
               ): null}
       </ScrollView>
     </View>
-    )
-}
+  );
+};
 
-
-export default B_Negative;
+export default A_Positive;
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-      },
-      titleStyle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'white',
-      },
-      nameStyle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: 'white',
-      },
-      numberStyle: {
-        fontSize: 16,
-        fontWeight: '900',
-        color: 'white',
-      },
-      bloodStyle: {
-        fontSize: 16,
-        fontWeight: '900',
-      },
-      centerContentStyle: {
-        flex: 3,
-        flexDirection: 'row',
-        paddingHorizontal: 15,
-      },
-      main_view: {
-        flex: 3,
-        backgroundColor: 'red',
-        elevation: 5,
-        borderTopRightRadius: 25,
-        borderTopLeftRadius: 25,
-      },
-      second_view: {
-        flex: 1,
-        backgroundColor: 'white',
-      },
-      inner_view_under_second_view: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      inner_view_under_second_view_margin: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 20,
-      },
-      area_for_donor_card: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red',
-        padding: 10,
-        marginVertical: 5,
-        borderRadius: 10,
-        elevation: 5,
-      },
-      empty_view: {
-        flex: 2,
-      },
-      image_view: {
-        flex: 3,
-      },
-      main_image: {
-        width: '100%',
-        height: 170,
-      },
-      login_image: {
-        width: '60%',
-        height: 150,
-      },
-      w_100: {
-        width: '100%',
-      },
-      btn: {
-        backgroundColor: 'red',
-        borderRadius: 25,
-        width: '50%',
-        padding: 13,
-        marginVertical: 15,
-      },
-      btn_text: {
-        color: 'white',
-        fontSize: 15,
-        fontWeight: '900',
-        textAlign: 'center',
-      },
-      route_text: {
-        color: 'red',
-        fontSize: 19,
-        fontWeight: 'bold',
-      },
-      color_white: {
-        color: 'white',
-        fontSize: 15,
-        fontWeight: '800',
-      },
-      flex_5_center: {
-        flex: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      flex_2_center: {
-        flex: 2,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      flex_2: {
-        flex: 2,
-      },
-      flex_3: {
-        flex: 3,
-      },
-      flex_7: {
-        flex: 7,
-      },
-      flex_row: {
-        flexDirection: 'row',
-      },
-  });
-  
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  titleStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  nameStyle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  numberStyle: {
+    fontSize: 16,
+    fontWeight: '900',
+    color: 'white',
+  },
+  bloodStyle: {
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  centerContentStyle: {
+    flex: 3,
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+  },
+  main_view: {
+    flex: 3,
+    backgroundColor: 'red',
+    elevation: 5,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+  },
+  second_view: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  inner_view_under_second_view: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inner_view_under_second_view_margin: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  area_for_donor_card: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  empty_view: {
+    flex: 2,
+  },
+  image_view: {
+    flex: 3,
+  },
+  main_image: {
+    width: '100%',
+    height: 170,
+  },
+  login_image: {
+    width: '60%',
+    height: 150,
+  },
+  w_100: {
+    width: '100%',
+  },
+  btn: {
+    backgroundColor: 'red',
+    borderRadius: 25,
+    width: '50%',
+    padding: 13,
+    marginVertical: 15,
+  },
+  btn_text: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  route_text: {
+    color: 'red',
+    fontSize: 19,
+    fontWeight: 'bold',
+  },
+  color_white: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: '800',
+  },
+  flex_5_center: {
+    flex: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  flex_2_center: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  flex_2: {
+    flex: 2,
+  },
+  flex_3: {
+    flex: 3,
+  },
+  flex_7: {
+    flex: 7,
+  },
+  flex_row: {
+    flexDirection: 'row',
+  },
+});

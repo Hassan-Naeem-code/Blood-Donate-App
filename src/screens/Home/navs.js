@@ -6,7 +6,8 @@ import AllDonor from '../Bottom_tabs/all-donor';
 import DonorDetail from '../Bottom_tabs/donor-details';
 import UserProfile from '../Bottom_tabs/user-profile';
 import EditProfile from '../Bottom_tabs/edit-profile';
-import FindDonor from '../Bottom_tabs/find-donor';
+import FindDonorComponent from '../Bottom_tabs/find-donor';
+import ShowDonorInfo from '../Bottom_tabs/show_donor_info';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -21,6 +22,14 @@ return(
 )
 }
 
+const FindDonor=()=>{
+  return(
+    <Stack.Navigator>
+    <Stack.Screen name="FindDonorComponent" component={FindDonorComponent} options={{headerShown: false}} />
+    <Stack.Screen name="ShowDonorInfo" component={ShowDonorInfo} options={{headerShown: false}} />
+  </Stack.Navigator>
+  )
+}
 
 const User = ()=>{
   return(

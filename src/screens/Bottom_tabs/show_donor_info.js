@@ -18,8 +18,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {signOut} from '../../../Store/actions/auth';
 import {useDispatch} from 'react-redux';
-
-const DonorDetails = ({navigation, route}) => {
+const ShowDonorInfo = ({navigation, route}) => {
   const {data} = route.params;
   const dispatch = useDispatch();
   return (
@@ -45,7 +44,7 @@ const DonorDetails = ({navigation, route}) => {
               <View style={styles.flex_2_center}>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('AllDonor');
+                    navigation.navigate('FindDonorComponent');
                   }}>
                   <MaterialCommunityIcon
                     name={'keyboard-backspace'}
@@ -76,28 +75,33 @@ const DonorDetails = ({navigation, route}) => {
                   <View style={styles.imageContainer}>
                     <Image
                       source={{
-                        uri:
-                          data.coverImage,
+                        uri: data.coverImage,
                       }}
                       style={styles.coverImage}
                     />
+                    {/* <TouchableOpacity
+                      style={{position: 'absolute', top: 0, left: 0}}
+                      onPress={() => {
+                        navigation.navigate('EditProfile');
+                      }}>
+                      <Text>Hello</Text>
+                    </TouchableOpacity> */}
                   </View>
                   <View style={styles.profileImage}>
                     <Image
                       source={{
-                        uri:
-                        data.profileImage,
+                        uri: data.profileImage,
                       }}
                       style={{width: 100, height: 100, borderRadius: 50}}
                     />
                   </View>
                 </View>
-                
+
                 <View style={styles.area_for_donor_card_detail}>
                   <View style={styles.inner_view_under_second_view}>
                     <View style={styles.flex_2}>
                       <Image
-                        source={{uri:data.profileImage}}
+                        source={{uri: data.profileImage}}
                         style={{width: '70%', height: 60, borderRadius: 100}}
                       />
                     </View>
@@ -130,7 +134,11 @@ const DonorDetails = ({navigation, route}) => {
                     <View style={styles.flex_3}>
                       <View style={styles.flex_row}>
                         <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>{data.number ? (data.number) : ('Mobile Number Not Verified')}</Text>
+                          <Text style={styles.numberStyle}>
+                            {data.number
+                              ? data.number
+                              : 'Mobile Number Not Verified'}
+                          </Text>
                         </View>
                       </View>
                     </View>
@@ -156,7 +164,11 @@ const DonorDetails = ({navigation, route}) => {
                     <View style={styles.flex_3}>
                       <View style={styles.flex_row}>
                         <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>{data.address ? (data.address) : ('Address Not Verified')}</Text>
+                          <Text style={styles.numberStyle}>
+                            {data.address
+                              ? data.address
+                              : 'Address Not Verified'}
+                          </Text>
                         </View>
                       </View>
                     </View>
@@ -182,7 +194,9 @@ const DonorDetails = ({navigation, route}) => {
                     <View style={styles.flex_3}>
                       <View style={styles.flex_row}>
                         <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>Blood Group: {data.blood_group}</Text>
+                          <Text style={styles.numberStyle}>
+                            Blood Group: {data.blood_group}
+                          </Text>
                         </View>
                       </View>
                     </View>
@@ -206,7 +220,7 @@ const DonorDetails = ({navigation, route}) => {
   );
 };
 
-export default DonorDetails;
+export default ShowDonorInfo;
 
 const styles = StyleSheet.create({
   container: {
@@ -328,10 +342,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  flex_2_start:{
-  flex:2,
-  justifyContent:'flex-start',
-  alignItems:'flex-start',
+  flex_2_start: {
+    flex: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   flex_2: {
     flex: 2,

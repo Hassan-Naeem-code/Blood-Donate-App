@@ -1,3 +1,10 @@
 export const USER_REGISTERED = 'USER_REGISTERED';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
-export const RESTAURANT_FOOD_ADD = 'RESTAURANT_FOOD_ADD';
+export const ALL_USERS = 'ALL_USERS';
+export const AB_POSITIVE = 'AB_POSITIVE';
+export const A_NEGATIVE = 'A_NEGATIVE';
+export const A_POSITIVE = 'A_POSITIVE';
+export const B_POSITIVE = 'B_POSITIVE' ;
+export const B_NEGATIVE = 'B_NEGATIVE';
+export const O_POSITIVE = 'O_POSITIVE';
+export const O_NEGATIVE = 'O_NEGATIVE';

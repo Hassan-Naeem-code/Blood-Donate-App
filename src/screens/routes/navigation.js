@@ -11,9 +11,11 @@ import DonorDetails from '../Bottom_tabs/donor-details';
 import EditProfile from '../Bottom_tabs/edit-profile';
 import FindDonor from '../Bottom_tabs/find-donor';
 import A_Negitive from '../Blood_groups/a_negative';
+import A_Positive from '../Blood_groups/a_positive';
 import AB_Positive from '../Blood_groups/ab_positive';
 import B_Positive from '../Blood_groups/b_positive';
 import O_Positive from '../Blood_groups/o_positive';
+import ShowDonorInfo from '../Bottom_tabs/show_donor_info';
 import {useSelector,useDispatch} from 'react-redux';
 import {fetchUserInfo} from '../../../Store/actions/auth';
 
@@ -66,11 +68,21 @@ const Navigation = () => {
             options={{headerShown: false}}
           />
            <Screen
+            name="ShowDonorInfo"
+            component={ShowDonorInfo}
+            options={{headerShown: false}}
+          />
+           <Screen
             name="B_Positive"
             component={B_Positive}
             options={{headerShown: false}}
           />
            <Screen
+            name="A_Positive"
+            component={A_Positive}
+            options={{headerShown: false}}
+          />
+            <Screen
             name="A_Negitive"
             component={A_Negitive}
             options={{headerShown: false}}
