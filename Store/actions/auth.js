@@ -2,7 +2,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 // import {LoginManager, AccessToken} from 'react-native-fbsdk';
 // import {GoogleSignin} from '@react-native-community/google-signin';
-import {USER_REGISTERED, USER_LOGGED_OUT} from '../constants/actiontypes';
+import {USER_REGISTERED, USER_LOGGED_OUT,ALL_USERS,A_NEGATIVE,A_POSITIVE,B_NEGATIVE,B_POSITIVE,O_NEGATIVE,O_POSITIVE,AB_POSITIVE} from '../constants/actiontypes';
 import {ToastAndroid} from 'react-native';
 
 // ...
@@ -260,7 +260,114 @@ export function fetchUserInfo(uid) {
       .where('uid', '==', uid)
       .get();
     userFound.forEach(function (doc) {
-      dispatch({type: USER_REGISTERED, payload: doc.data()});
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: USER_REGISTERED, payload: user});
     });
   };
+}
+
+export function fetchAllUsers(uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: ALL_USERS, payload: user});
+    });
+  };
+}
+
+export function bring_A_Negative(blood,uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid).where('blood_group','==',blood)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: A_NEGATIVE, payload: user});
+    });
+  };
+}
+
+export function bring_A_Positive(blood,uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid).where('blood_group','==',blood)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: A_POSITIVE, payload: user});
+    });
+  };
+}
+
+export function bring_AB_Positive(blood,uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid).where('blood_group','==',blood)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: AB_POSITIVE, payload: user});
+    });
+  };
+}
+
+export function bring_B_Positive(blood,uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid).where('blood_group','==',blood)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: B_POSITIVE, payload: user});
+    });
+  };
+}
+
+export function bring_O_Positive(blood,uid){
+  return async (dispatch) => {
+    let userFound = await firestore()
+      .collection('users')
+      .where('uid', '!=', uid).where('blood_group','==',blood)
+      .get();
+    userFound.forEach(function (doc) {
+      let user = doc.data();
+      user.id = doc.id;
+      dispatch({type: O_POSITIVE, payload: user});
+    });
+  };
+}
+
+
+export function updateUserInfo(user,navigation){
+  return async (dispatch)=>{
+    await firestore().collection('users').doc(user.id).set({
+      contactNumber: user.number,
+      email : user.email,
+      name: user.name,
+      address: user.address,
+      number: user.number,
+      coverImage: user.coverImage,
+      profileImage: user.profileImage,
+      blood_group: user.blood_group,
+      uid : user.uid,
+      id: user.id
+    });
+    dispatch({type: USER_REGISTERED, payload: user});
+    ToastAndroid.show('Profile Edit Successfully', 2000);
+    navigation.navigate('UserProfile');
+  }
 }

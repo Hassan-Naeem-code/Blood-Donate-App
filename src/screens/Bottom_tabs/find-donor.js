@@ -19,6 +19,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {signOut} from '../../../Store/actions/auth';
 import {useDispatch} from 'react-redux';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import A_POS from '../Blood_groups/a_positive';
 import A_NEG from '../Blood_groups/a_negative';
 import AB_POS from '../Blood_groups/ab_positive';
 import B_POS from '../Blood_groups/b_positive';
@@ -58,13 +59,14 @@ const FindDonor = ({navigation}) => {
                   }}>
                   <Text style={styles.color_white}>
                     {' '}
-                    Sign Out{'  '}
+                    {'  '}
                     <AntDesign name={'logout'} size={20} color={'white'} />
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
             <Tab.Navigator>
+              <Tab.Screen name="A_POS" component={A_POS} />
               <Tab.Screen name="A_NEG" component={A_NEG} />
               <Tab.Screen name="AB_POS" component={AB_POS} />
               <Tab.Screen name="B_POS" component={B_POS} />

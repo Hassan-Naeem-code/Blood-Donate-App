@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -15,12 +15,38 @@ import {
 import {Form, Item, Input, Label} from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {signOut} from '../../../Store/actions/auth';
-import {useDispatch} from 'react-redux';
+import {signOut, fetchAllUsers} from '../../../Store/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
 
 const AllDonor = ({navigation}) => {
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
+  const wait = (time) => {
+    setTimeout(() => {
+      setRefreshing(false);
+    }, time);
+  };
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(fetchAllUsers(user.uid));
+      }
+    });
+    wait(1200);
+  }, []);
+  useEffect(() => {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(fetchAllUsers(user.uid));
+      }
+    });
+  }, []);
+  const getUsers = useSelector(({auth}) => {
+    return auth.users;
+  });
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -51,57 +77,82 @@ const AllDonor = ({navigation}) => {
                   }}>
                   <Text style={styles.color_white}>
                     {' '}
-                    Sign Out{'  '}
+                   {'  '}
                     <AntDesign name={'logout'} size={20} color={'white'} />
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
-            <ScrollView>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('DonorDetail');
-                }}>
-                <View style={styles.area_for_donor_card}>
-                  <View style={styles.inner_view_under_second_view}>
-                    <View style={styles.flex_2}>
-                      <Image
-                        source={require('../../assets/Images/background-banner.jpg')}
-                        style={{width: '80%', height: 80, borderRadius: 100}}
-                      />
-                    </View>
-                    <View style={styles.flex_3}>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.nameStyle}>Name Here</Text>
+            <ScrollView
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }>
+                {getUsers && getUsers.length > 0
+                  ? getUsers.map((item, index) => {
+                      return (
+                        <View style={styles.area_for_donor_card} key={index}>
+                          <View style={styles.inner_view_under_second_view}>
+                            <View style={styles.flex_2}>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  navigation.navigate('DonorDetail',{data:item});
+                                }}>
+                                <Image
+                                  source={{uri: item.profileImage}}
+                                  style={{
+                                    width: '80%',
+                                    height: 80,
+                                    borderRadius: 100,
+                                  }}
+                                />
+                              </TouchableOpacity>
+                            </View>
+                            <View style={styles.flex_3}>
+                              <View style={styles.flex_row}>
+                                <View style={styles.flex_7}>
+                                  <TouchableOpacity
+                                    onPress={() => {
+                                      navigation.navigate('DonorDetail',{data:item});
+                                    }}>
+                                    <Text style={styles.nameStyle}>
+                                      {item.name}
+                                    </Text>
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                              <View style={styles.flex_row}>
+                                <View style={styles.flex_7}>
+                                  <Text style={styles.numberStyle}>
+                                    <MaterialCommunityIcon
+                                      name={'cellphone-iphone'}
+                                      size={20}
+                                      color={'red'}
+                                    />{' '}
+                                    Not Verified
+                                  </Text>
+                                </View>
+                              </View>
+                            </View>
+                            <View style={styles.flex_2_center}>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  navigation.navigate('DonorDetail',{data:item});
+                                }}>
+                                <Text style={styles.bloodStyle}>
+                                  {item.blood_group}{' '}
+                                  <MaterialCommunityIcon
+                                    name={'blood-bag'}
+                                    size={20}
+                                    color={'red'}
+                                  />
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
                         </View>
-                      </View>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>
-                            <MaterialCommunityIcon
-                              name={'cellphone-iphone'}
-                              size={20}
-                              color={'red'}
-                            />{' '}
-                            Mobile Number
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                    <View style={styles.flex_2_center}>
-                      <Text style={styles.bloodStyle}>
-                        AB+{' '}
-                        <MaterialCommunityIcon
-                          name={'blood-bag'}
-                          size={20}
-                          color={'red'}
-                        />
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+                      );
+                    })
+                  : null}
             </ScrollView>
           </View>
         </View>
@@ -169,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     padding: 10,
+    marginVertical: 10,
   },
   empty_view: {
     flex: 2,

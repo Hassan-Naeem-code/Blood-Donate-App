@@ -13,14 +13,18 @@ import {
   RefreshControl,
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {signOut} from '../../../Store/actions/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const UserProfile = ({navigation}) => {
   const dispatch = useDispatch();
+  const getUser = useSelector(({auth}) => {
+    return auth.auth;
+  });
+  console.log('User data is here', getUser);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -51,7 +55,7 @@ const UserProfile = ({navigation}) => {
                   }}>
                   <Text style={styles.color_white}>
                     {' '}
-                    Sign Out{'  '}
+                    {'  '}
                     <AntDesign name={'logout'} size={20} color={'white'} />
                   </Text>
                 </TouchableOpacity>
@@ -68,6 +72,13 @@ const UserProfile = ({navigation}) => {
                       }}
                       style={styles.coverImage}
                     />
+                    <TouchableOpacity
+                      style={styles.edit_btn}
+                      onPress={() => {
+                        navigation.navigate('EditProfile');
+                      }}>
+                      <FontAwesome name={'edit'} size={25} color={'white'} />
+                    </TouchableOpacity>
                   </View>
                   <View style={styles.profileImage}>
                     <Image
@@ -80,6 +91,115 @@ const UserProfile = ({navigation}) => {
                   </View>
                 </View>
               </View>
+            
+              <View style={styles.area_for_donor_card_detail}>
+                  <View style={styles.inner_view_under_second_view}>
+                    <View style={styles.flex_2}>
+                      <Image
+                        source={{uri:getUser.profileImage}}
+                        style={{width: '70%', height: 60, borderRadius: 100}}
+                      />
+                    </View>
+                    <View style={styles.flex_3}>
+                      <View style={styles.flex_row}>
+                        <View style={styles.flex_7}>
+                          <Text style={styles.nameStyle}>{getUser.name}</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.flex_2_center}>
+                      <Text style={styles.bloodStyle}>
+                        <MaterialCommunityIcon
+                          name={'blood-bag'}
+                          size={20}
+                          color={'red'}
+                        />
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.area_for_donor_card_detail}>
+                  <View style={styles.inner_view_under_second_view}>
+                    <View style={styles.flex_2}>
+                      <Image
+                        source={require('../../assets/Images/mobile.png')}
+                        style={{width: '70%', height: 60, borderRadius: 100}}
+                      />
+                    </View>
+                    <View style={styles.flex_3}>
+                      <View style={styles.flex_row}>
+                        <View style={styles.flex_7}>
+                          <Text style={styles.numberStyle}>{getUser.number ? (getUser.number) : ('Mobile Number Not Verified')}</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.flex_2_center}>
+                      <Text style={styles.bloodStyle}>
+                        <MaterialCommunityIcon
+                          name={'blood-bag'}
+                          size={20}
+                          color={'red'}
+                        />
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <View style={styles.area_for_donor_card_detail}>
+                  <View style={styles.inner_view_under_second_view}>
+                    <View style={styles.flex_2}>
+                      <Image
+                        source={require('../../assets/Images/address.png')}
+                        style={{width: '70%', height: 60, borderRadius: 100}}
+                      />
+                    </View>
+                    <View style={styles.flex_3}>
+                      <View style={styles.flex_row}>
+                        <View style={styles.flex_7}>
+                          <Text style={styles.numberStyle}>{getUser.address ? (getUser.address) : ('Address Not Verified')}</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.flex_2_center}>
+                      <Text style={styles.bloodStyle}>
+                        <MaterialCommunityIcon
+                          name={'blood-bag'}
+                          size={20}
+                          color={'red'}
+                        />
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+               
+                <View style={styles.area_for_donor_card_detail}>
+                  <View style={styles.inner_view_under_second_view}>
+                    <View style={styles.flex_2}>
+                      <Image
+                        source={require('../../assets/Images/blood.jpg')}
+                        style={{width: '70%', height: 60, borderRadius: 100}}
+                      />
+                    </View>
+                    <View style={styles.flex_3}>
+                      <View style={styles.flex_row}>
+                        <View style={styles.flex_7}>
+                          <Text style={styles.numberStyle}>Blood Group: {getUser.blood_group}</Text>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.flex_2_center}>
+                      <Text style={styles.bloodStyle}>
+                        <MaterialCommunityIcon
+                          name={'blood-bag'}
+                          size={20}
+                          color={'red'}
+                        />
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+            
             </ScrollView>
           </View>
         </View>
@@ -100,15 +220,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  // area_for_donor_card_detail: {
+  //   backgroundColor: 'white',
+  //   padding: 10,
+  //   borderRadius: 10,
+  //   elevation: 5,
+  //   marginVertical: 15,
+  // },
   nameStyle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'red',
   },
   numberStyle: {
     fontSize: 16,
     fontWeight: '900',
-    color: 'white',
+    color: 'red',
   },
   bloodStyle: {
     fontSize: 16,
@@ -149,7 +276,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     padding: 10,
     borderRadius: 10,
     elevation: 5,
@@ -173,16 +300,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   btn: {
-    backgroundColor: 'red',
-    borderRadius: 25,
-    width: '50%',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    width: '40%',
     padding: 13,
-    marginVertical: 15,
+    marginVertical: 8,
+    alignSelf: 'center',
   },
   btn_text: {
-    color: 'white',
-    fontSize: 15,
-    fontWeight: '900',
+    color: 'red',
+    fontSize: 18,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
   route_text: {
@@ -256,5 +384,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
+  },
+  edit_btn: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
   },
 });

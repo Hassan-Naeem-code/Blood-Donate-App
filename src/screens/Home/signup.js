@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {Form, Item, Input, Label} from 'native-base';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -66,67 +67,69 @@ const Signup = ({navigation}) => {
         </View>
         <View style={styles.centerContentStyle}>
           <View style={styles.main_view}>
-            {/* <Image
+            <ScrollView>
+              {/* <Image
               source={require('../../assets/Images/drop.png')}
               style={styles.login_image}
             /> */}
-            <Text style={styles.titleStyle}>Blood Donation App</Text>
-            <Form style={styles.w_100}>
-              <Item floatingLabel>
-                <Label>Username</Label>
-                <Input
-                  value={name}
-                  onChangeText={(text) => {
-                    setName(text);
-                  }}
-                />
-              </Item>
-              <Item floatingLabel>
-                <Label>Email</Label>
-                <Input
-                  value={email}
-                  onChangeText={(text) => {
-                    setEmail(text);
-                  }}
-                />
-              </Item>
-              <Item floatingLabel>
-                <Label>Blood Group (Write As: A+,A-,B+,B-,AB+,AB-,O+,O-)</Label>
-                <Input
-                  value={blood_group}
-                  onChangeText={(text) => {
-                    setBloodGroup(text);
-                  }}
-                />
-              </Item>
-              <Item floatingLabel last>
-                <Label>Password</Label>
-                <Input
-                  value={password}
-                  onChangeText={(text) => {
-                    setPassword(text);
-                  }}
-                  secureTextEntry={true}
-                />
-              </Item>
-            </Form>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={check_Validate_sign_up}>
-              <Text style={styles.btn_text}>
-                Sign Up{' '}
-                <Fontisto name={'blood-drop'} size={20} color={'#fff'} />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Login');
-              }}>
-              <Text style={styles.route_text}>
-                Already Have An Account Login {''}
-                <Fontisto name={'blood-drop'} size={20} color={'red'} />
-              </Text>
-            </TouchableOpacity>
+              <Text style={styles.titleStyle}>Blood Donation App</Text>
+              <Form style={styles.w_100}>
+                <Item floatingLabel>
+                  <Label>Username</Label>
+                  <Input
+                    value={name}
+                    onChangeText={(text) => {
+                      setName(text);
+                    }}
+                  />
+                </Item>
+                <Item floatingLabel>
+                  <Label>Email</Label>
+                  <Input
+                    value={email}
+                    onChangeText={(text) => {
+                      setEmail(text);
+                    }}
+                  />
+                </Item>
+                <Item floatingLabel>
+                  <Label>Blood Group </Label>
+                  <Input
+                    value={blood_group}
+                    onChangeText={(text) => {
+                      setBloodGroup(text);
+                    }}
+                  />
+                </Item>
+                <Item floatingLabel last>
+                  <Label>Password</Label>
+                  <Input
+                    value={password}
+                    onChangeText={(text) => {
+                      setPassword(text);
+                    }}
+                    secureTextEntry={true}
+                  />
+                </Item>
+              </Form>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={check_Validate_sign_up}>
+                <Text style={styles.btn_text}>
+                  Sign Up{' '}
+                  <Fontisto name={'blood-drop'} size={20} color={'#fff'} />
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Login');
+                }}>
+                <Text style={styles.route_text}>
+                  Already Have An Account Login {''}
+                  <Fontisto name={'blood-drop'} size={20} color={'red'} />
+                </Text>
+              </TouchableOpacity>
+            </ScrollView>
           </View>
         </View>
       </View>
@@ -143,7 +146,9 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 28,
     fontWeight: 'bold',
+    textAlign: 'center',
     color: 'red',
+    marginVertical: 10,
   },
   centerContentStyle: {
     flex: 3,
@@ -153,8 +158,6 @@ const styles = StyleSheet.create({
   main_view: {
     flex: 3,
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     elevation: 5,
@@ -189,6 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 25,
     width: '50%',
+    alignSelf: 'center',
     padding: 13,
     marginVertical: 15,
   },
@@ -202,5 +206,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 19,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

@@ -51,46 +51,49 @@ const Login = ({navigation}) => {
         </View>
         <View style={styles.centerContentStyle}>
           <View style={styles.main_view}>
-            {/* <Image
+            <ScrollView>
+              {/* <Image
               source={require('../../assets/Images/drop.png')}
               style={styles.login_image}
             /> */}
-            <Text style={styles.titleStyle}>Blood Donation App</Text>
-            <Form style={styles.w_100}>
-              <Item floatingLabel>
-                <Label>Username or Email Address</Label>
-                <Input
-                  value={email}
-                  onChangeText={(text) => {
-                    setEmail(text);
-                  }}
-                />
-              </Item>
-              <Item floatingLabel last>
-                <Label>Password</Label>
-                <Input
-                  value={password}
-                  onChangeText={(text) => {
-                    setPassword(text);
-                  }}
-                  secureTextEntry={true}
-                />
-              </Item>
-            </Form>
-            <TouchableOpacity style={styles.btn} onPress={validate_login}>
-              <Text style={styles.btn_text}>
-                Login <Fontisto name={'blood-drop'} size={20} color={'#fff'} />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Signup');
-              }}>
-              <Text style={styles.route_text}>
-                Don't Have An Account Sign Up {''}
-                <Fontisto name={'blood-drop'} size={20} color={'red'} />
-              </Text>
-            </TouchableOpacity>
+              <Text style={styles.titleStyle}>Blood Donation App</Text>
+              <Form style={styles.w_100}>
+                <Item floatingLabel>
+                  <Label>Username or Email Address</Label>
+                  <Input
+                    value={email}
+                    onChangeText={(text) => {
+                      setEmail(text);
+                    }}
+                  />
+                </Item>
+                <Item floatingLabel last>
+                  <Label>Password</Label>
+                  <Input
+                    value={password}
+                    onChangeText={(text) => {
+                      setPassword(text);
+                    }}
+                    secureTextEntry={true}
+                  />
+                </Item>
+              </Form>
+              <TouchableOpacity style={styles.btn} onPress={validate_login}>
+                <Text style={styles.btn_text}>
+                  Login{' '}
+                  <Fontisto name={'blood-drop'} size={20} color={'#fff'} />
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Signup');
+                }}>
+                <Text style={styles.route_text}>
+                  Don't Have An Account Sign Up {''}
+                  <Fontisto name={'blood-drop'} size={20} color={'red'} />
+                </Text>
+              </TouchableOpacity>
+            </ScrollView>
           </View>
         </View>
       </View>
@@ -107,7 +110,9 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 28,
     fontWeight: 'bold',
+    textAlign: 'center',
     color: 'red',
+    marginVertical: 10,
   },
   centerContentStyle: {
     flex: 3,
@@ -117,11 +122,9 @@ const styles = StyleSheet.create({
   main_view: {
     flex: 3,
     backgroundColor: 'white',
-    elevation: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    elevation: 5,
   },
   second_view: {
     flex: 1,
@@ -153,6 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 25,
     width: '50%',
+    alignSelf: 'center',
     padding: 13,
     marginVertical: 15,
   },
@@ -166,5 +170,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 19,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
