@@ -91,115 +91,124 @@ const UserProfile = ({navigation}) => {
                   </View>
                 </View>
               </View>
-            
-              <View style={styles.area_for_donor_card_detail}>
-                  <View style={styles.inner_view_under_second_view}>
-                    <View style={styles.flex_2}>
-                      <Image
-                        source={{uri:getUser.profileImage}}
-                        style={{width: '70%', height: 60, borderRadius: 100}}
-                      />
-                    </View>
-                    <View style={styles.flex_3}>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.nameStyle}>{getUser.name}</Text>
-                        </View>
-                      </View>
-                    </View>
-                    <View style={styles.flex_2_center}>
-                      <Text style={styles.bloodStyle}>
-                        <MaterialCommunityIcon
-                          name={'blood-bag'}
-                          size={20}
-                          color={'red'}
-                        />
-                      </Text>
-                    </View>
-                  </View>
-                </View>
 
-                <View style={styles.area_for_donor_card_detail}>
-                  <View style={styles.inner_view_under_second_view}>
-                    <View style={styles.flex_2}>
-                      <Image
-                        source={require('../../assets/Images/mobile.png')}
-                        style={{width: '70%', height: 60, borderRadius: 100}}
-                      />
-                    </View>
-                    <View style={styles.flex_3}>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>{getUser.number ? (getUser.number) : ('Mobile Number Not Verified')}</Text>
-                        </View>
+              <View style={styles.area_for_donor_card_detail}>
+                <View style={styles.inner_view_under_second_view}>
+                  <View style={styles.flex_2}>
+                    <Image
+                      source={{uri: getUser?.profileImage}}
+                      style={{width: '70%', height: 60, borderRadius: 100}}
+                    />
+                  </View>
+                  <View style={styles.flex_3}>
+                    <View style={styles.flex_row}>
+                      <View style={styles.flex_7}>
+                        <Text style={styles.nameStyle}>{getUser?.name}</Text>
                       </View>
                     </View>
-                    <View style={styles.flex_2_center}>
-                      <Text style={styles.bloodStyle}>
-                        <MaterialCommunityIcon
-                          name={'blood-bag'}
-                          size={20}
-                          color={'red'}
-                        />
-                      </Text>
-                    </View>
+                  </View>
+                  <View style={styles.flex_2_center}>
+                    <Text style={styles.bloodStyle}>
+                      <MaterialCommunityIcon
+                        name={'blood-bag'}
+                        size={20}
+                        color={'red'}
+                      />
+                    </Text>
                   </View>
                 </View>
-                
-                <View style={styles.area_for_donor_card_detail}>
-                  <View style={styles.inner_view_under_second_view}>
-                    <View style={styles.flex_2}>
-                      <Image
-                        source={require('../../assets/Images/address.png')}
-                        style={{width: '70%', height: 60, borderRadius: 100}}
-                      />
-                    </View>
-                    <View style={styles.flex_3}>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>{getUser.address ? (getUser.address) : ('Address Not Verified')}</Text>
-                        </View>
+              </View>
+
+              <View style={styles.area_for_donor_card_detail}>
+                <View style={styles.inner_view_under_second_view}>
+                  <View style={styles.flex_2}>
+                    <Image
+                      source={require('../../assets/Images/mobile.png')}
+                      style={{width: '70%', height: 60, borderRadius: 100}}
+                    />
+                  </View>
+                  <View style={styles.flex_3}>
+                    <View style={styles.flex_row}>
+                      <View style={styles.flex_7}>
+                        <Text style={styles.numberStyle}>
+                          {getUser?.number
+                            ? getUser?.number
+                            : 'Mobile Number Not Verified'}
+                        </Text>
                       </View>
                     </View>
-                    <View style={styles.flex_2_center}>
-                      <Text style={styles.bloodStyle}>
-                        <MaterialCommunityIcon
-                          name={'blood-bag'}
-                          size={20}
-                          color={'red'}
-                        />
-                      </Text>
-                    </View>
+                  </View>
+                  <View style={styles.flex_2_center}>
+                    <Text style={styles.bloodStyle}>
+                      <MaterialCommunityIcon
+                        name={'blood-bag'}
+                        size={20}
+                        color={'red'}
+                      />
+                    </Text>
                   </View>
                 </View>
-               
-                <View style={styles.area_for_donor_card_detail}>
-                  <View style={styles.inner_view_under_second_view}>
-                    <View style={styles.flex_2}>
-                      <Image
-                        source={require('../../assets/Images/blood.jpg')}
-                        style={{width: '70%', height: 60, borderRadius: 100}}
-                      />
-                    </View>
-                    <View style={styles.flex_3}>
-                      <View style={styles.flex_row}>
-                        <View style={styles.flex_7}>
-                          <Text style={styles.numberStyle}>Blood Group: {getUser.blood_group}</Text>
-                        </View>
+              </View>
+
+              <View style={styles.area_for_donor_card_detail}>
+                <View style={styles.inner_view_under_second_view}>
+                  <View style={styles.flex_2}>
+                    <Image
+                      source={require('../../assets/Images/address.png')}
+                      style={{width: '70%', height: 60, borderRadius: 100}}
+                    />
+                  </View>
+                  <View style={styles.flex_3}>
+                    <View style={styles.flex_row}>
+                      <View style={styles.flex_7}>
+                        <Text style={styles.numberStyle}>
+                          {getUser?.address
+                            ? getUser?.address
+                            : 'Address Not Verified'}
+                        </Text>
                       </View>
                     </View>
-                    <View style={styles.flex_2_center}>
-                      <Text style={styles.bloodStyle}>
-                        <MaterialCommunityIcon
-                          name={'blood-bag'}
-                          size={20}
-                          color={'red'}
-                        />
-                      </Text>
-                    </View>
+                  </View>
+                  <View style={styles.flex_2_center}>
+                    <Text style={styles.bloodStyle}>
+                      <MaterialCommunityIcon
+                        name={'blood-bag'}
+                        size={20}
+                        color={'red'}
+                      />
+                    </Text>
                   </View>
                 </View>
-            
+              </View>
+
+              <View style={styles.area_for_donor_card_detail}>
+                <View style={styles.inner_view_under_second_view}>
+                  <View style={styles.flex_2}>
+                    <Image
+                      source={require('../../assets/Images/blood.jpg')}
+                      style={{width: '70%', height: 60, borderRadius: 100}}
+                    />
+                  </View>
+                  <View style={styles.flex_3}>
+                    <View style={styles.flex_row}>
+                      <View style={styles.flex_7}>
+                        <Text style={styles.numberStyle}>
+                          Blood Group: {getUser?.blood_group}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={styles.flex_2_center}>
+                    <Text style={styles.bloodStyle}>
+                      <MaterialCommunityIcon
+                        name={'blood-bag'}
+                        size={20}
+                        color={'red'}
+                      />
+                    </Text>
+                  </View>
+                </View>
+              </View>
             </ScrollView>
           </View>
         </View>
