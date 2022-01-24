@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {Provider} from 'react-redux';
 // import {GoogleSignin} from '@react-native-community/google-signin';
 import store, {persistor} from './Store/index';
 import Navigation from './src/screens/routes/navigation';
 import {PersistGate} from 'redux-persist/integration/react';
+import Splash from './src/screens/splash/index';
 // import Splash from './Screens/Splash Screen/splash';
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
   // }, []);
   return (
     <Provider store={store}>
-      <PersistGate loading={<Text>Hello World</Text>} persistor={persistor}>
+      <PersistGate loading={<Splash />} persistor={persistor}>
         <Navigation />
       </PersistGate>
     </Provider>
